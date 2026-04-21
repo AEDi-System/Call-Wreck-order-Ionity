@@ -10,7 +10,7 @@
   const btnStop         = document.getElementById('btn-stop');
   const btnPickDir      = document.getElementById('btn-pick-dir');
   const storageBanner   = document.getElementById('storage-banner');
-  const storageMsgEl   = document.getElementById('storage-msg');
+  const storageMsg      = document.getElementById('storage-msg');
   const recIndicator    = document.getElementById('rec-indicator');
   const savePathDisplay = document.getElementById('save-path-display');
   const recordingsList  = document.getElementById('recordings-list');
@@ -135,7 +135,7 @@
   }
 
   function showBanner(msg, type = 'warning', showBtn = false) {
-    storageMsgEl.textContent = msg;
+    storageMsg.textContent = msg;
     storageBanner.className = `banner banner--${type}`;
     btnPickDir.classList.toggle('hidden', !showBtn);
     storageBanner.classList.remove('hidden');

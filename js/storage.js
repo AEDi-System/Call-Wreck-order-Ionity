@@ -49,7 +49,8 @@ const IonityStorage = (() => {
 
   /**
    * Build the canonical filename: YYYYMMDD_HHMMSS_XXXXXXXX.webm
-   * The 8-char ID corresponds to the ******** placeholder in /.Ionity/CWO/********.
+   * where XXXXXXXX is an 8-character alphanumeric recording ID.
+   * Full device path: /.Ionity/CWO/YYYYMMDD_HHMMSS_XXXXXXXX.webm
    * @returns {string}
    */
   function _buildFilename() {

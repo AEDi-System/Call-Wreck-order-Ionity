@@ -49,9 +49,7 @@ class CwoRecorder {
       throw new Error('Already recording.');
     }
 
-    // Request microphone.  On some platforms a second call with
-    // { audio: { echoCancellation: false } } can capture system audio;
-    // fall back gracefully if it fails.
+    // Request microphone access.
     this._stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         echoCancellation: true,
