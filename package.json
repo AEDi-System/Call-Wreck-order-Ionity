@@ -1,0 +1,13 @@
+{
+  "name": "ionity-nodes-living",
+  "version": "1.0.0",
+  "description": "TypeScript animated nodes living visualization with Ionity brand theme",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "start": "npx serve dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
