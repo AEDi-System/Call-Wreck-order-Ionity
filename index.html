@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a5fad" />
+  <meta name="description" content="Mobile call recorder PWA – cross-device, cross-service." />
+
+  <title>Call Wreck Order – Ionity</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- iOS PWA hints -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="CWO Ionity" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SPLASH / LOADING SCREEN
+       Shown while app assets load; dismissed by app.js
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="splash" role="status" aria-label="Loading Call Wreck Order – Ionity">
+
+    <!-- IONITY logo (SVG inline for instant render, no extra request) -->
+    <svg class="splash-logo"
+         xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 520 160"
+         aria-hidden="true">
+      <defs>
+        <!-- subtle inner glow on the white counter-forms -->
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- ── I (left) ─────────────────────────────────────── -->
+      <rect x="10"  y="18" width="44" height="124" rx="3" fill="#1a5fad"/>
+      <rect x="20"  y="30" width="24" height="100" rx="2" fill="#fff" filter="url(#glow)"/>
+
+      <!-- ── O ─────────────────────────────────────────────── -->
+      <rect x="68"  y="18" width="76" height="124" rx="3" fill="#1a5fad"/>
+      <rect x="80"  y="30" width="52" height="100" rx="2" fill="#fff"/>
+      <rect x="86"  y="36" width="40" height="88"  rx="2" fill="#1a5fad"/>
+
+      <!-- ── N ─────────────────────────────────────────────── -->
+      <!-- left pillar -->
+      <rect x="158" y="18" width="44" height="124" rx="3" fill="#1a5fad"/>
+      <rect x="168" y="30" width="24" height="100" rx="2" fill="#fff"/>
+      <!-- right pillar -->
+      <rect x="248" y="18" width="44" height="124" rx="3" fill="#1a5fad"/>
+      <rect x="258" y="30" width="24" height="100" rx="2" fill="#fff"/>
+      <!-- diagonal connecting bar -->
+      <polygon fill="#1a5fad"
+               points="202,18 248,18 248,62 202,106"/>
+
+      <!-- ── I (middle) ──────────────────────────────────── -->
+      <rect x="306" y="18" width="44" height="124" rx="3" fill="#1a5fad"/>
+      <rect x="316" y="30" width="24" height="100" rx="2" fill="#fff" filter="url(#glow)"/>
+
+      <!-- ── T ─────────────────────────────────────────────── -->
+      <!-- crossbar -->
+      <rect x="360" y="18" width="124" height="42" rx="3" fill="#1a5fad"/>
+      <rect x="370" y="28" width="104" height="22" rx="2" fill="#fff"/>
+      <!-- stem -->
+      <rect x="404" y="60" width="36" height="82"  rx="3" fill="#1a5fad"/>
+      <rect x="414" y="60" width="16" height="82"  rx="2" fill="#fff"/>
+
+      <!-- ── Y ─────────────────────────────────────────────── -->
+      <!-- reuse T-column for Y but shift right -->
+      <!-- left arm -->
+      <polygon fill="#1a5fad"
+               points="460,18 504,18 482,76 438,76"/>
+      <!-- right arm -->
+      <polygon fill="#1a5fad"
+               points="504,18 520,18 520,50 482,76 460,50"/>
+      <!-- stem -->
+      <rect x="460" y="76" width="44" height="66" rx="3" fill="#1a5fad"/>
+      <rect x="470" y="76" width="24" height="66" rx="2" fill="#fff"/>
+    </svg>
+
+    <p class="splash-tagline">Call Recording · Anywhere</p>
+
+    <!-- progress bar -->
+    <div class="splash-bar" aria-hidden="true">
+      <div class="splash-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN APP SHELL
+       Hidden until splash is dismissed
+  ══════════════════════════════════════════════════════════════ -->
+  <div id="app">
+
+    <header>
+      <!-- small logo reused from above inline SVG -->
+      <svg class="header-logo"
+           xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 520 160"
+           height="32"
+           aria-label="Ionity logo">
+        <rect x="10"  y="18" width="44" height="124" rx="3" fill="#fff"/>
+        <rect x="68"  y="18" width="76" height="124" rx="3" fill="#fff"/>
+        <rect x="80"  y="30" width="52" height="100" rx="2" fill="#1a5fad"/>
+        <rect x="86"  y="36" width="40" height="88"  rx="2" fill="#fff"/>
+        <rect x="158" y="18" width="44" height="124" rx="3" fill="#fff"/>
+        <rect x="248" y="18" width="44" height="124" rx="3" fill="#fff"/>
+        <polygon fill="#fff" points="202,18 248,18 248,62 202,106"/>
+        <rect x="306" y="18" width="44" height="124" rx="3" fill="#fff"/>
+        <rect x="360" y="18" width="124" height="42" rx="3" fill="#fff"/>
+        <rect x="404" y="60" width="36" height="82"  rx="3" fill="#fff"/>
+        <polygon fill="#fff" points="460,18 504,18 482,76 438,76"/>
+        <polygon fill="#fff" points="504,18 520,18 520,50 482,76 460,50"/>
+        <rect x="460" y="76" width="44" height="66" rx="3" fill="#fff"/>
+      </svg>
+      <h1>Call Wreck Order</h1>
+    </header>
+
+    <main>
+      <!-- App content will be rendered here -->
+      <p style="color:var(--ionity-blue);text-align:center;margin-top:48px;font-size:1rem;">
+        Ready to record calls.
+      </p>
+    </main>
+
+  </div><!-- /#app -->
+
+  <script src="app.js" defer></script>
+</body>
+</html>

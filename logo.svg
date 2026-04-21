@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" width="400" height="140">
+  <!-- IONITY wordmark — blue block letters with inner-stroke detail -->
+  <style>
+    .outer { fill: #1a5fad; }
+    .inner { fill: #ffffff; }
+  </style>
+
+  <!-- I -->
+  <rect class="outer" x="10"  y="20" width="36" height="100" rx="2"/>
+  <rect class="inner" x="20"  y="30" width="16" height="80"  rx="1"/>
+
+  <!-- O -->
+  <rect class="outer" x="58"  y="20" width="60" height="100" rx="2"/>
+  <rect class="inner" x="68"  y="30" width="40" height="80"  rx="1"/>
+  <rect class="outer" x="72"  y="34" width="32" height="72"  rx="1"/>
+
+  <!-- N -->
+  <rect class="outer" x="130" y="20" width="36" height="100" rx="2"/>
+  <rect class="outer" x="204" y="20" width="36" height="100" rx="2"/>
+  <!-- diagonal bar -->
+  <polygon class="outer" points="166,20 204,20 204,48 166,92"/>
+  <rect class="inner" x="140" y="30" width="16" height="80" rx="1"/>
+  <rect class="inner" x="214" y="30" width="16" height="80" rx="1"/>
+
+  <!-- I -->
+  <rect class="outer" x="252" y="20" width="36" height="100" rx="2"/>
+  <rect class="inner" x="262" y="30" width="16" height="80"  rx="1"/>
+
+  <!-- T -->
+  <rect class="outer" x="298" y="20" width="96" height="34" rx="2"/>
+  <rect class="outer" x="330" y="54" width="32" height="66" rx="2"/>
+  <rect class="inner" x="308" y="30" width="76" height="14" rx="1"/>
+  <rect class="inner" x="340" y="44" width="12" height="66" rx="1"/>
+
+  <!-- Y -->
+  <polygon class="outer" points="396,20 360,20 346,54 332,20 296,20 330,80 330,120 362,120 362,80"/>
+  <polygon class="inner" points="384,30 360,30 346,66 332,30 308,30 336,86 336,110 356,110 356,86"/>
+</svg>

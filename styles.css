@@ -1,0 +1,140 @@
+/* ─── Reset & base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ionity-blue:   #1a5fad;
+  --ionity-dark:   #0d3a6e;
+  --ionity-light:  #e8f0fb;
+  --white:         #ffffff;
+  --text:          #1a1a2e;
+  --radius:        12px;
+  --transition:    0.35s ease;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ─── Splash / Loading screen ───────────────────────────────── */
+#splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#splash.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-logo {
+  width: min(80vw, 320px);
+  animation: logoIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.splash-tagline {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ionity-blue);
+  opacity: 0;
+  animation: fadeUp 0.6s ease 0.6s forwards;
+}
+
+/* spinner bar */
+.splash-bar {
+  margin-top: 48px;
+  width: min(60vw, 240px);
+  height: 4px;
+  background: var(--ionity-light);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.splash-bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--ionity-blue);
+  border-radius: 2px;
+  animation: loadBar 1.8s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+}
+
+/* ─── Main app shell ─────────────────────────────────────────── */
+#app {
+  display: none;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+#app.visible { display: flex; }
+
+/* Header */
+header {
+  background: var(--ionity-blue);
+  color: var(--white);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+
+header img.header-logo {
+  height: 32px;
+  filter: brightness(0) invert(1);
+}
+
+header h1 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* Main content area */
+main {
+  flex: 1;
+  padding: 24px 20px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ─── Keyframes ──────────────────────────────────────────────── */
+@keyframes logoIn {
+  from { opacity: 0; transform: scale(0.82) translateY(20px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loadBar {
+  0%   { width: 0;    opacity: 1; }
+  80%  { width: 100%; opacity: 1; }
+  100% { width: 100%; opacity: 0; }
+}
+
+/* ─── Responsive tweaks ──────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --white: #0f1923;
+    --text:  #e8f0fb;
+    --ionity-light: #1a2b3d;
+  }
+  #splash { background: #0f1923; }
+  header img.header-logo { filter: none; }
+}
