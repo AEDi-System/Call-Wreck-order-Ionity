@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1a73e8" />
+    <meta name="description" content="Cross device, cross service call recorder." />
+    <link rel="manifest" href="manifest.json" />
+    <title>Call Wreck Order Ionity</title>
+    <style>
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+      header {
+        width: 100%;
+        background: #1a73e8;
+        color: #fff;
+        padding: 1rem;
+        text-align: center;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 1rem;
+        width: 100%;
+        max-width: 480px;
+      }
+      #status {
+        font-size: 0.9rem;
+        color: #555;
+        min-height: 1.5rem;
+      }
+      #record-btn {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: none;
+        background: #e53935;
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(229,57,53,0.4);
+        transition: transform 0.15s, box-shadow 0.15s;
+      }
+      #record-btn:active { transform: scale(0.95); }
+      #record-btn.recording { background: #555; box-shadow: none; }
+      #recordings { width: 100%; }
+      #recordings h2 { font-size: 1rem; margin-bottom: 0.75rem; color: #444; }
+      #recording-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+      #recording-list li {
+        background: #fff;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      #recording-list audio { flex: 1; }
+      #recording-list span { font-size: 0.75rem; color: #888; white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <header>📞 Call Recorder</header>
+    <main>
+      <p id="status">Press the button to start recording.</p>
+      <button id="record-btn" aria-label="Record">⏺ Record</button>
+      <section id="recordings">
+        <h2>Recordings</h2>
+        <ul id="recording-list"></ul>
+      </section>
+    </main>
+    <script src="app.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "appId": "com.aedi.callwreck",
+  "appName": "Call Wreck Order Ionity",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#ffffff",
+    "buildOptions": {
+      "keystorePath": null,
+      "keystoreAlias": null
+    }
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}

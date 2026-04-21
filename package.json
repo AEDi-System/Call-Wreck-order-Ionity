@@ -1,0 +1,20 @@
+{
+  "name": "call-wreck-order-ionity",
+  "version": "1.0.0",
+  "description": "Mobile call recorder PWA application — cross device, cross service.",
+  "private": true,
+  "scripts": {
+    "build": "cp -r src/* www/",
+    "sync": "npx cap sync android",
+    "open:android": "npx cap open android",
+    "build:apk": "cd android && ./gradlew assembleDebug",
+    "build:apk:release": "cd android && ./gradlew assembleRelease"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}

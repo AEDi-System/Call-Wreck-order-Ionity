@@ -1,0 +1,55 @@
+name: "Build Android APK"
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android platform and build tools
+        run: sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
+
+      - name: Build web assets
+        run: npm run build
+
+      - name: Sync Capacitor Android project
+        run: npm run sync
+
+      - name: Build debug APK
+        run: npm run build:apk
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: call-wreck-debug.apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
