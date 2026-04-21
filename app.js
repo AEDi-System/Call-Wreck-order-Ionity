@@ -15,10 +15,10 @@ function hideSplash() {
   const app    = document.getElementById('app');
   if (!splash || !app) return;
 
-  // Minimum display time keeps the logo visible long enough to read
-  const MIN_MS = 1800;
+  // Keep the splash visible long enough for users to register the brand logo
+  const MIN_SPLASH_MS = 1800;
   const elapsed = performance.now();
-  const delay = Math.max(0, MIN_MS - elapsed);
+  const delay = Math.max(0, MIN_SPLASH_MS - elapsed);
 
   setTimeout(() => {
     splash.classList.add('hidden');
