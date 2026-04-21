@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#6366f1" />
+  <meta name="description" content="Cross-device, cross-service call recorder PWA with end-to-end encryption." />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <title>Call Wreck — Ionity</title>
+
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Application styles -->
+  <link rel="stylesheet" href="/css/app.css" />
+
+  <!--
+    Google Identity Services (GIS) script.
+    Replace YOUR_GOOGLE_CLIENT_ID in app.js (or set window.__GOOGLE_CLIENT_ID__
+    before this script loads) with your actual OAuth 2.0 client ID.
+    See: https://console.cloud.google.com/apis/credentials
+  -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       AUTH SCREEN
+       ══════════════════════════════════════════════════════════════════ -->
+  <section id="auth-screen">
+    <div class="auth-card">
+
+      <!-- Logo -->
+      <div class="auth-logo">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="10" fill="#6366f1"/>
+          <path d="M10 14a4 4 0 0 1 4-4h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a1 1 0 0 0-1 1v.5a6.5 6.5 0 0 0 6.5 6.5H21a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a10 10 0 0 1-10-10V14Z" fill="#fff"/>
+          <circle cx="26" cy="11" r="4" fill="#22c55e"/>
+        </svg>
+        <span>Call Wreck · Ionity</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs" role="tablist">
+        <button class="auth-tab active" id="tab-login"    role="tab" aria-selected="true">Sign in</button>
+        <button class="auth-tab"        id="tab-register" role="tab" aria-selected="false">Create account</button>
+      </div>
+
+      <!-- ── Login form ── -->
+      <form class="auth-form" id="login-form" novalidate aria-label="Sign in">
+        <div class="banner" id="login-banner" role="alert" aria-live="polite"></div>
+
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" name="email"
+                 autocomplete="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="login-pw">Password</label>
+          <div class="field-row">
+            <input type="password" id="login-pw" name="password"
+                   autocomplete="current-password" placeholder="••••••••" required />
+            <button type="button" class="toggle-pw" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="login-btn">Sign in</button>
+
+        <div class="divider">or</div>
+
+        <!-- Google Sign-In button rendered by GIS -->
+        <div id="google-btn-login" style="width:100%;min-height:44px;" aria-label="Sign in with Google"></div>
+      </form>
+
+      <!-- ── Register form ── -->
+      <form class="auth-form hidden" id="register-form" novalidate aria-label="Create account">
+        <div class="banner" id="reg-banner" role="alert" aria-live="polite"></div>
+
+        <div class="field">
+          <label for="reg-name">Display name</label>
+          <input type="text" id="reg-name" name="name"
+                 autocomplete="name" placeholder="Your name" required />
+        </div>
+
+        <div class="field">
+          <label for="reg-email">Email</label>
+          <input type="email" id="reg-email" name="email"
+                 autocomplete="email" placeholder="you@example.com" required />
+        </div>
+
+        <div class="field">
+          <label for="reg-pw">Password</label>
+          <div class="field-row">
+            <input type="password" id="reg-pw" name="password"
+                   autocomplete="new-password" placeholder="••••••••" required />
+            <button type="button" class="toggle-pw" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁</span>
+            </button>
+          </div>
+          <div class="strength-meter">
+            <div class="strength-bar" id="strength-bar"></div>
+          </div>
+          <span class="strength-label" id="strength-label" aria-live="polite"></span>
+        </div>
+
+        <div class="field">
+          <label for="reg-pw2">Confirm password</label>
+          <div class="field-row">
+            <input type="password" id="reg-pw2" name="confirm-password"
+                   autocomplete="new-password" placeholder="••••••••" required />
+            <button type="button" class="toggle-pw" aria-label="Toggle password visibility">
+              <span class="eye-icon">👁</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" id="reg-btn">Create account</button>
+
+        <div class="divider">or</div>
+
+        <!-- Google Sign-In button rendered by GIS -->
+        <div id="google-btn-register" style="width:100%;min-height:44px;" aria-label="Sign in with Google"></div>
+      </form>
+
+    </div>
+  </section><!-- /#auth-screen -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       MAIN APP SHELL  (hidden until signed in)
+       ══════════════════════════════════════════════════════════════════ -->
+  <div id="app-screen" class="hidden">
+
+    <header class="app-header">
+      <h1>
+        <svg width="22" height="22" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+          <rect width="36" height="36" rx="10" fill="#6366f1"/>
+          <path d="M10 14a4 4 0 0 1 4-4h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a1 1 0 0 0-1 1v.5a6.5 6.5 0 0 0 6.5 6.5H21a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1a10 10 0 0 1-10-10V14Z" fill="#fff"/>
+          <circle cx="26" cy="11" r="4" fill="#22c55e"/>
+        </svg>
+        CallWreck
+      </h1>
+      <div class="header-actions">
+        <span class="user-badge" id="user-badge" aria-label="Signed in as"></span>
+        <button class="btn-icon" id="sign-out-btn" title="Sign out" aria-label="Sign out">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+               viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 01-2 2H6a2 2 0 01-2-2V7a2 2 0 012-2h5a2 2 0 012 2v1"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="app-body">
+      <button class="recorder-circle" id="rec-btn" aria-label="Start recording" title="Tap to record">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" aria-hidden="true">
+          <circle cx="12" cy="11" r="4"/>
+          <path d="M19 11a7 7 0 01-14 0M12 18v3M9 21h6"/>
+        </svg>
+      </button>
+      <p class="rec-status" id="rec-status">Tap to start recording</p>
+    </main>
+
+  </div><!-- /#app-screen -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════
+       LOCK SCREEN  (shown on inactivity / hidden tab)
+       ══════════════════════════════════════════════════════════════════ -->
+  <div id="lock-screen" class="hidden" role="dialog" aria-modal="true" aria-label="App locked">
+    <div class="lock-card">
+
+      <svg class="lock-icon" width="48" height="48" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <rect x="3" y="11" width="18" height="11" rx="2"/>
+        <path d="M7 11V7a5 5 0 0110 0v4"/>
+      </svg>
+
+      <h2>App Locked</h2>
+      <p id="lock-user" aria-label="Locked account"></p>
+
+      <div class="field" style="width:100%;text-align:left">
+        <label for="lock-pw">Password</label>
+        <div class="field-row">
+          <input type="password" id="lock-pw" name="lock-password"
+                 autocomplete="current-password" placeholder="Enter your password" />
+          <button type="button" class="toggle-pw" aria-label="Toggle password visibility">
+            <span class="eye-icon">👁</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="banner" id="lock-banner" role="alert" aria-live="polite"></div>
+
+      <button class="btn btn-primary" id="lock-btn" style="width:100%">Unlock</button>
+
+    </div>
+  </div><!-- /#lock-screen -->
+
+
+  <!-- Application JS (ES modules) -->
+  <script type="module" src="/js/app.js"></script>
+
+</body>
+</html>
