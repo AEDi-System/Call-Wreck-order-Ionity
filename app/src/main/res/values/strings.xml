@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Call Wreck Ionity</string>
+
+    <!-- Invite / Share screen -->
+    <string name="invite_title">Invite Member</string>
+    <string name="invite_headline">Share the Full App</string>
+    <string name="invite_subhead">Send the complete APK to your friends\nvia Bluetooth, Wi-Fi, or Google Drive</string>
+    <string name="invite_message">Hey! Install Call Wreck Ionity – a powerful cross-device call recorder. I\'m sharing the full app with you.</string>
+    <string name="invite_note">Your friend receives the real APK, not just a link.</string>
+
+    <string name="share_via_bluetooth">Share via Bluetooth</string>
+    <string name="share_via_wifi">Share via Wi-Fi / Nearby</string>
+    <string name="share_via_drive">Upload to Google Drive</string>
+    <string name="share_drive_link">Share Drive Link</string>
+
+    <!-- Errors -->
+    <string name="error_apk_not_found">Could not locate the app APK</string>
+    <string name="error_permission_denied">Permission denied – cannot share</string>
+    <string name="error_drive_upload">Drive upload failed. Please try again.</string>
+
+    <!-- Wi-Fi Direct service notifications -->
+    <string name="notif_channel_name">App Transfer</string>
+    <string name="notif_transfer_title">Sending App…</string>
+    <string name="notif_transfer_text">Transferring Call Wreck Ionity to peer device</string>
+</resources>

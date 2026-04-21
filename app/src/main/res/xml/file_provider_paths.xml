@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Expose the cached APK file for Bluetooth / Wi-Fi Direct sharing -->
+    <cache-path name="apk_cache" path="apk_share/" />
+    <!-- Expose recordings stored in app-specific external storage -->
+    <external-files-path name="recordings" path="Recordings/" />
+</paths>

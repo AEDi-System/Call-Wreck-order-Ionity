@@ -1,0 +1,23 @@
+# Built output
+build/
+app/build/
+
+# Local configuration
+local.properties
+*.keystore
+*.jks
+
+# Android Studio
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Gradle caches
+.gradle/
+
+# Node / web artefacts (for future PWA layer)
+node_modules/
+dist/
